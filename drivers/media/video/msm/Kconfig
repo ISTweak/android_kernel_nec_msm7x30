@@ -1,0 +1,69 @@
+#/**********************************************************************
+#* File Name: drivers/media/video/msm/Kconfig
+#* 
+#* (C) NEC CASIO Mobile Communications, Ltd. 2011
+#**********************************************************************/
+config MSM_CAMERA_V4L2
+        bool "MSM Camera V4L2 Interface"
+        depends on MSM_CAMERA
+        default n
+        ---help---
+          This flag enables V4L2 interface of MSM
+          camera driver. If enabled, application interacts
+          with /dev/video0 through V4L2 APIs. Otherwise,
+          native APIs are used through /dev/config0, /dev/frame0,
+          and /dev/control0.
+
+comment "Camera Sensor Selection"
+config SN12M0PZ
+	bool "Sensor sn12m0pz (Bayer 12 MP)"
+	depends on MSM_CAMERA && ARCH_MSM7X30
+	default y
+	---help---
+	  Sony 12 MP Bayer Sensor
+config IUS006F
+	bool "Sensor ius006f (Sony 5M)"
+	depends on MSM_CAMERA
+	default y
+	---help---
+	  Sony 5M with Autofocus
+
+config MSM_CAMERA_FLASH
+	bool "Qualcomm MSM camera flash support"
+	depends on MSM_CAMERA
+	default y
+	---help---
+	  Enable support for LED flash for msm camera
+
+config MSM_GEMINI
+	tristate "Qualcomm MSM Gemini Jpeg Engine support"
+	depends on MSM_CAMERA && (ARCH_MSM7X30 || ARCH_MSM8X60)
+	default M
+	---help---
+	  Enable support for Gemini Jpeg Engine
+
+config CAMCMP
+	bool "Camera Component"
+	depends on MSM_CAMERA
+	default y
+	---help---
+	  Camera Component
+
+config MSM_VPE
+	tristate "Qualcomm MSM Video Pre-processing Engine support"
+	depends on MSM_CAMERA && (ARCH_MSM7X30 || ARCH_MSM8X60)
+	default y
+	---help---
+	  Enable support for Video Pre-processing Engine
+
+config QUP_EXCLUSIVE_TO_CAMERA
+	bool "QUP exclusive to camera"
+	depends on MSM_CAMERA
+	default y
+	---help---
+	  This flag enabled states that QUP
+	  is exclusive to camera. In case this
+	  is disabled, the lvs1 voltage is enabled
+	  by QUP in the board file as QUP is used by
+	  applications other than camera.
+
